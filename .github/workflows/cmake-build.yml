@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Build_${{ matrix.platform }}
-          path: ${{ github.workspace }}/build/src/Release
+          path: ${{ github.workspace }}/build
