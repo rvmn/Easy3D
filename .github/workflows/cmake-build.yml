@@ -22,14 +22,12 @@ jobs:
         name: Create Build Environment
         run: sudo apt-get update || true;
              sudo apt-get install libgl1-mesa-dev mesa-common-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev;
-      - name: Configure
-        run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - if: ${{ matrix.platform == 'Ubuntu' || matrix.platform == 'MacOS' }}
         name: Make
-        run: cd build && make
+        run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make
       - if: ${{ matrix.platform == 'Windows' }}
         name: Make
-        run: cd build && nmake
+        run: mkdir build && cd build && cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release .. && nmake
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
