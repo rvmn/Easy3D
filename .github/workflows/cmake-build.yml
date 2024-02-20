@@ -14,7 +14,7 @@ jobs:
           fail-fast: false
           matrix:
             platform: [Windows, Ubuntu, macOS]
-            build_type: [Debug, Release]
+            build_type: [Release]
     runs-on: "${{ matrix.platform }}-latest"
     steps:
       - uses: actions/checkout@v1
@@ -23,9 +23,9 @@ jobs:
         run: sudo apt-get update || true;
              sudo apt-get install libgl1-mesa-dev mesa-common-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev;
       - name: Configure
-        run: cmake -H"." -B"build/${{ matrix.build_type }}" -DEasy3D_BUILD_TESTS=ON;
-      - name: "Build on ${{ matrix.platform }} - ${{ matrix.build_type }}"
-        run: cmake --build "build/${{ matrix.build_type }}";
+        run: mkdir Release && cd Release && cmake -DCMAKE_BUILD_TYPE=Release ..
+      - name: Make
+        run: make
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
