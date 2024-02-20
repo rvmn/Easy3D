@@ -26,3 +26,8 @@ jobs:
         run: cmake -H"." -B"build/${{ matrix.build_type }}" -DEasy3D_BUILD_TESTS=ON;
       - name: "Build on ${{ matrix.platform }} - ${{ matrix.build_type }}"
         run: cmake --build "build/${{ matrix.build_type }}";
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build_${{ matrix.platform }}
+          path: ${{ github.workspace }}/build/src/Release
