@@ -27,7 +27,7 @@ jobs:
         run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make
       - if: ${{ matrix.platform == 'Windows' }}
         name: Make
-        run: mkdir build && cd build && cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release .. && nmake
+        run: mkdir build && cd build && cmake -G "NMake Makefiles" -DCMAKE_CXX_COMPILER=msbuild -DCMAKE_C_COMPILER=msbuild -DCMAKE_BUILD_TYPE=Release .. && nmake
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
