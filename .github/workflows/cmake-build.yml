@@ -23,9 +23,9 @@ jobs:
         run: sudo apt-get update || true;
              sudo apt-get install libgl1-mesa-dev mesa-common-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev;
       - name: Configure
-        run: mkdir Release && cd Release && cmake -DCMAKE_BUILD_TYPE=Release ..
+        run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: Make
-        run: make
+        run: cd build && make
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
